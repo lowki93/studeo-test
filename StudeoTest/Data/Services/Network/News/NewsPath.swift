@@ -10,6 +10,7 @@ import Foundation
 enum NewsPath: NetworkPath {
   case everything
   case search
+  case news
 
   var rawValue: String {
     switch self {
@@ -17,6 +18,8 @@ enum NewsPath: NetworkPath {
       return "/everything"
     case .search:
       return "/search"
+    case .news:
+      return "/news"
     }
   }
 }

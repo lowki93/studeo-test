@@ -9,7 +9,7 @@ import Foundation
 
 struct EverythingNewsApiNetworkPayload: Decodable, ModelConvertible {
 
-  let articles: [ArticleNewsApiNetworkpayload]
+  let articles: [ArticleNewsApiNetworkPayload]
 
   func toModel() throws -> [News] {
     return try articles.toDomainModel(.dropFailingElements)

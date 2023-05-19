@@ -10,5 +10,6 @@ import Foundation
 extension URL {
 
   static let newsApi = URL(stringLiteral: "https://newsapi.org/v2")
-  static let gnews = URL(stringLiteral: "https://gnews.io/api/v4")
+  static let gnewsApi = URL(stringLiteral: "https://gnews.io/api/v4")
+  static let mediastack = URL(stringLiteral: "http://api.mediastack.com/v1")
 }

@@ -17,17 +17,16 @@ struct DefaultNewsNetworkService: NewsNetworkService {
   }
 
   func news(from source: NewsSource, query: String, perPage: Int) async throws -> [News] {
-    let endpoint = generateEndpoint(source: source, query: query, perPage: perPage)
+    let endpoint = generateNewsEndpoint(source: source, query: query, perPage: perPage)
     let data = try await client.request(url: endpoint.url, method: .get, parameters: endpoint.params)
     do {
-      let payload = try decoder.decode(EverythingNewsApiNetworkPayload.self, from: data)
-      return try payload.toModel()
+      return try decodingNews(data: data, from: source)
     } catch {
       throw error
     }
   }
 
-  private func generateEndpoint(source: NewsSource, query: String, perPage: Int) -> (url: URL, params: [String: Any]) {
+  private func generateNewsEndpoint(source: NewsSource, query: String, perPage: Int) -> (url: URL, params: [String: Any]) {
     switch source {
     case .newsApi:
       return (
@@ -36,10 +35,28 @@ struct DefaultNewsNetworkService: NewsNetworkService {
       )
     case .gnews:
       return (
-        url: .gnews.appending(path: NewsPath.search.rawValue),
+        url: .gnewsApi.appending(path: NewsPath.search.rawValue),
         params: ["apikey": Key.News.gnews, "q": query, "max": perPage]
+      )
+    case .mediastack:
+      return (
+        url: .mediastack.appending(path: NewsPath.news.rawValue),
+        params: ["access_key": Key.News.mediastack, "keywords": query, "limit": perPage]
       )
     }
   }
 
+  private func decodingNews(data: Data, from source: NewsSource) throws -> [News] {
+    switch source {
+    case .newsApi:
+      let payload = try decoder.decode(EverythingNewsApiNetworkPayload.self, from: data)
+      return try payload.toModel()
+    case .gnews:
+      let payload = try decoder.decode(SearchGNewsNetworkPayload.self, from: data)
+      return try payload.toModel()
+    case .mediastack:
+      let payload = try decoder.decode(NewsMediastackNetworkPayload.self, from: data)
+      return try payload.toModel()
+    }
+  }
 }

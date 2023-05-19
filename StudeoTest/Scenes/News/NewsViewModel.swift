@@ -29,6 +29,6 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
 extension NewsViewModel: NewsWorkerDelegate {
 
   func didUpdateNews(_ news: [News], from source: NewsSource) {
-    dump(news)
+    dump("---> \(source) - \(news.count)")
   }
 }
