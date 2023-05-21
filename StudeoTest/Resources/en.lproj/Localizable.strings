@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  StudeoTest
+
+  Created by Kevin Budain on 21/05/2023.
+  
+*/
+
+// NewsView
+"news.navigation.title" = "News";
+"news.row.publishedAtFrom" = "At %1$@ from %2$@";

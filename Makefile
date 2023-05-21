@@ -1,0 +1,2 @@
+init:
+	./scripts/install.sh

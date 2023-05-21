@@ -15,7 +15,7 @@ struct NewsRow: View {
   var body: some View {
     VStack(alignment: .leading) {
       HStack {
-        Text("At \(Text(news.publishedAt, style: .time)) from \(news.source)")
+        Text(L10n.News.Row.publishedAtFrom(DateFormatter.time(style: .short, date: news.publishedAt), news.source))
       }
       .font(.caption2)
       .foregroundColor(.secondary)

@@ -63,6 +63,9 @@
 		6C25AECA2A1A9C8700C119B1 /* RoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEC92A1A9C8700C119B1 /* RoundedRectangle.swift */; };
 		6C25AECC2A1A9DE500C119B1 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AECB2A1A9DE500C119B1 /* Optional.swift */; };
 		6C25AED22A1AAF1400C119B1 /* NewsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AED12A1AAF1400C119B1 /* NewsRouter.swift */; };
+		6C25AED62A1AB21900C119B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C25AED82A1AB21900C119B1 /* Localizable.strings */; };
+		6C25AEDC2A1AB79D00C119B1 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEDB2A1AB79D00C119B1 /* Strings.swift */; };
+		6C25AEDE2A1AB90A00C119B1 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEDD2A1AB90A00C119B1 /* DateFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +143,9 @@
 		6C25AEC92A1A9C8700C119B1 /* RoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangle.swift; sourceTree = "<group>"; };
 		6C25AECB2A1A9DE500C119B1 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		6C25AED12A1AAF1400C119B1 /* NewsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRouter.swift; sourceTree = "<group>"; };
+		6C25AED72A1AB21900C119B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C25AEDB2A1AB79D00C119B1 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		6C25AEDD2A1AB90A00C119B1 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +253,9 @@
 			isa = PBXGroup;
 			children = (
 				6C25AE3C2A151C9A00C119B1 /* Info.plist */,
+				6C25AED82A1AB21900C119B1 /* Localizable.strings */,
 				6C25AE0F2A1519CC00C119B1 /* Assets.xcassets */,
+				6C25AED32A1AB1FA00C119B1 /* Generated */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -432,6 +440,7 @@
 			children = (
 				6C25AE8A2A165DCF00C119B1 /* URL.swift */,
 				6C25AECB2A1A9DE500C119B1 /* Optional.swift */,
+				6C25AEDD2A1AB90A00C119B1 /* DateFormatter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -538,6 +547,14 @@
 			path = Symbol;
 			sourceTree = "<group>";
 		};
+		6C25AED32A1AB1FA00C119B1 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				6C25AEDB2A1AB79D00C119B1 /* Strings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -545,6 +562,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C25AE2D2A1519CC00C119B1 /* Build configuration list for PBXNativeTarget "StudeoTest" */;
 			buildPhases = (
+				6C25AEDA2A1AB68300C119B1 /* SwiftGen */,
 				6C25AE042A1519CB00C119B1 /* Sources */,
 				6C25AE052A1519CB00C119B1 /* Frameworks */,
 				6C25AE062A1519CB00C119B1 /* Resources */,
@@ -655,6 +673,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C25AE142A1519CC00C119B1 /* Preview Assets.xcassets in Resources */,
+				6C25AED62A1AB21900C119B1 /* Localizable.strings in Resources */,
 				6C25AE102A1519CC00C119B1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -674,6 +693,30 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6C25AEDA2A1AB68300C119B1 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/swiftgen.yml",
+				"$(SRCROOT)/StudeoTest/Resources/en.lproj/Localizable.strings",
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/StudeoTest/Resources/Generated/Strings.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./scripts/swiftgen.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6C25AE042A1519CB00C119B1 /* Sources */ = {
@@ -704,6 +747,7 @@
 				6C25AE972A16673A00C119B1 /* ModelConvertible.swift in Sources */,
 				6C25AEBE2A1A9A0700C119B1 /* Image.swift in Sources */,
 				6C25AEC22A1A9B9600C119B1 /* SpacingPrimitive.swift in Sources */,
+				6C25AEDE2A1AB90A00C119B1 /* DateFormatter.swift in Sources */,
 				6C25AE5E2A16334200C119B1 /* NetwotkClient.swift in Sources */,
 				6C25AECC2A1A9DE500C119B1 /* Optional.swift in Sources */,
 				6C25AE722A16356700C119B1 /* DecoderService.swift in Sources */,
@@ -714,6 +758,7 @@
 				6C25AE8B2A165DCF00C119B1 /* URL.swift in Sources */,
 				6C25AECA2A1A9C8700C119B1 /* RoundedRectangle.swift in Sources */,
 				6C25AED22A1AAF1400C119B1 /* NewsRouter.swift in Sources */,
+				6C25AEDC2A1AB79D00C119B1 /* Strings.swift in Sources */,
 				6C25AE6F2A16351800C119B1 /* NetworkError.swift in Sources */,
 				6C25AE862A165A8000C119B1 /* NewsNetworkService.swift in Sources */,
 				6C25AE622A16337400C119B1 /* URLRequest.swift in Sources */,
@@ -761,6 +806,17 @@
 			targetProxy = 6C25AE242A1519CC00C119B1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6C25AED82A1AB21900C119B1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C25AED72A1AB21900C119B1 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6C25AE2B2A1519CC00C119B1 /* Debug */ = {
