@@ -66,6 +66,9 @@
 		6C25AED62A1AB21900C119B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C25AED82A1AB21900C119B1 /* Localizable.strings */; };
 		6C25AEDC2A1AB79D00C119B1 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEDB2A1AB79D00C119B1 /* Strings.swift */; };
 		6C25AEDE2A1AB90A00C119B1 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEDD2A1AB90A00C119B1 /* DateFormatter.swift */; };
+		6C25AEED2A1ABA4900C119B1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C25AEEC2A1ABA4900C119B1 /* Colors.xcassets */; };
+		6C25AEEF2A1ABACF00C119B1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEEE2A1ABACF00C119B1 /* Colors.swift */; };
+		6C25AEF12A1ABDF900C119B1 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEF02A1ABDF900C119B1 /* Assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +149,9 @@
 		6C25AED72A1AB21900C119B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C25AEDB2A1AB79D00C119B1 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		6C25AEDD2A1AB90A00C119B1 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		6C25AEEC2A1ABA4900C119B1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		6C25AEEE2A1ABACF00C119B1 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		6C25AEF02A1ABDF900C119B1 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,9 +259,10 @@
 			isa = PBXGroup;
 			children = (
 				6C25AE3C2A151C9A00C119B1 /* Info.plist */,
-				6C25AED82A1AB21900C119B1 /* Localizable.strings */,
 				6C25AE0F2A1519CC00C119B1 /* Assets.xcassets */,
+				6C25AEEC2A1ABA4900C119B1 /* Colors.xcassets */,
 				6C25AED32A1AB1FA00C119B1 /* Generated */,
+				6C25AED82A1AB21900C119B1 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -550,6 +557,8 @@
 		6C25AED32A1AB1FA00C119B1 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				6C25AEF02A1ABDF900C119B1 /* Assets.swift */,
+				6C25AEEE2A1ABACF00C119B1 /* Colors.swift */,
 				6C25AEDB2A1AB79D00C119B1 /* Strings.swift */,
 			);
 			path = Generated;
@@ -673,6 +682,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C25AE142A1519CC00C119B1 /* Preview Assets.xcassets in Resources */,
+				6C25AEED2A1ABA4900C119B1 /* Colors.xcassets in Resources */,
 				6C25AED62A1AB21900C119B1 /* Localizable.strings in Resources */,
 				6C25AE102A1519CC00C119B1 /* Assets.xcassets in Resources */,
 			);
@@ -705,12 +715,16 @@
 			inputPaths = (
 				"$(SRCROOT)/swiftgen.yml",
 				"$(SRCROOT)/StudeoTest/Resources/en.lproj/Localizable.strings",
+				"$(SRCROOT)/StudeoTest/Resources/Colors.xcassets",
+				"$(SRCROOT)/StudeoTest/Resources/Assets.xcassets",
 			);
 			name = SwiftGen;
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/StudeoTest/Resources/Generated/Strings.swift",
+				StudeoTest/Resources/Generated/Strings.swift,
+				StudeoTest/Resources/Generated/Colors.swift,
+				StudeoTest/Resources/Generated/Assets.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -746,6 +760,7 @@
 				6C25AEB62A1A98F300C119B1 /* FramePrimitive.swift in Sources */,
 				6C25AE972A16673A00C119B1 /* ModelConvertible.swift in Sources */,
 				6C25AEBE2A1A9A0700C119B1 /* Image.swift in Sources */,
+				6C25AEF12A1ABDF900C119B1 /* Assets.swift in Sources */,
 				6C25AEC22A1A9B9600C119B1 /* SpacingPrimitive.swift in Sources */,
 				6C25AEDE2A1AB90A00C119B1 /* DateFormatter.swift in Sources */,
 				6C25AE5E2A16334200C119B1 /* NetwotkClient.swift in Sources */,
@@ -754,6 +769,7 @@
 				6C25AE4A2A1628E900C119B1 /* NewsViewModel.swift in Sources */,
 				6C25AE6D2A1634FC00C119B1 /* DataRequest.swift in Sources */,
 				6C25AEC82A1A9C7500C119B1 /* CornerRadiusPrimitive.swift in Sources */,
+				6C25AEEF2A1ABACF00C119B1 /* Colors.swift in Sources */,
 				6C25AE572A16312C00C119B1 /* Key.swift in Sources */,
 				6C25AE8B2A165DCF00C119B1 /* URL.swift in Sources */,
 				6C25AECA2A1A9C8700C119B1 /* RoundedRectangle.swift in Sources */,

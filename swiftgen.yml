@@ -4,17 +4,17 @@ strings:
     templateName: structured-swift5
     output: StudeoTest/Resources/Generated/Strings.swift
 
-# xcassets:
-#   - inputs: Cosmo-Test/Resources/Assets.xcassets
-#     outputs:
-#       - templatePath: templates/Assets.stencil
-#         output: Cosmo-Test/Resources/Generated/Assets.swift
-#         params:
-#           enumName: Assets
+xcassets:
+  - inputs: StudeoTest/Resources/Assets.xcassets
+    outputs:
+      - templatePath: templates/Assets.stencil
+        output: StudeoTest/Resources/Generated/Assets.swift
+        params:
+          enumName: Assets
 
-#   - inputs: Cosmo-Test/Resources/Colors.xcassets
-#     outputs:
-#       - templatePath: templates/Colors.stencil
-#         output: Cosmo-Test/Resources/Generated/Colors.swift
-#         params:
-#           enumName: Colors
+  - inputs: StudeoTest/Resources/Colors.xcassets
+    outputs:
+      - templatePath: templates/Colors.stencil
+        output: StudeoTest/Resources/Generated/Colors.swift
+        params:
+          enumName: Colors

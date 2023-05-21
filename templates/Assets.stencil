@@ -1,0 +1,44 @@
+// swiftlint:disable all
+{% if catalogs %}
+import SwiftUI
+
+{% set imageAlias %}{{param.imageAliasName|default:"ImageEnum"}}{% endset %}
+{% set enumName %}{{param.enumName|default:"ImageAsset"}}{% endset %}
+{% macro enumBlock assets sp %}
+{{sp}}  {% call casesBlock assets sp %}
+{% endmacro %}
+{% macro casesBlock assets sp %}
+{{sp}}  {% for asset in assets %}
+{{sp}}  {% if asset.type == "image" %}
+{{sp}}  case {{asset.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord|}} = "{{asset.value}}"
+{{sp}}  {% elif asset.items %}
+{{sp}}  {% call casesBlock asset.items sp %}
+{{sp}}  {% endif %}
+{{sp}}  {% endfor %}
+{% endmacro %}
+enum {{enumName}}: String {
+  {% if catalogs.count > 1 %}
+  {% for catalog in catalogs %}
+  enum {{catalog.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% call enumBlock catalog.assets "  " %}
+  }
+  {% endfor %}
+  {% else %}
+  {% call enumBlock catalogs.first.assets "" %}
+  {% endif %}
+}
+
+extension Image {
+  init(_ asset: {{param.enumName}}) {
+    self.init(asset.rawValue)
+  }
+}
+
+extension UIImage {
+  convenience init?(_ asset: {{param.enumName}}) {
+    self.init(named: asset.rawValue)
+  }
+}
+{% else %}
+// No assets found
+{% endif %}

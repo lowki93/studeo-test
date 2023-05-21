@@ -1,0 +1,32 @@
+// swiftlint:disable all
+{% if catalogs %}
+{% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}{% endif %}{% endset %}
+import SwiftUI
+
+{% macro casesBlock assets type prefix %}
+  {% for asset in assets %}
+  {% if asset.type == type %}
+  static var {% if prefix %}{{prefix}}{% endif %}{{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: Self { {{type|capitalize}}("{{asset.value}}") }
+  {% elif asset.items and ( forceNamespaces == "true" or asset.isNamespaced == "true" ) %}
+    {% set prefixed_asset %}{% if prefix == "" %}{{asset.name|lowerFirstWord|swiftIdentifier:"pretty"}}_{% else %}{{prefix}}{{asset.name|lowerFirstWord|swiftIdentifier:"pretty"}}_{% endif %}{% endset %}
+    {% call casesBlock asset.items type prefixed_asset %}
+  {% elif asset.items %}
+  {% call casesBlock asset.items type prefix %}
+  {% endif %}
+  {% endfor %}
+{% endmacro %}
+{{accessModifier}}extension ShapeStyle where Self == Color {
+  {% if catalogs.count > 1 %}
+  {% for catalog in catalogs %}
+    {% set prefixed_catalog %}{{catalog.name|swiftIdentifier:"pretty"|lowerFirstWord}}_{% endset %}
+    {% if forceNamespaces == "true" %} {% call casesBlock catalog.assets "color" prefixed_catalog %}{% else %}{% call casesBlock catalog.assets "color" "" %}{% endif %}
+  {% endfor %}
+  {% else %}
+  {% set prefixed_catalog %}{{catalogs.first.name|swiftIdentifier:"pretty"|lowerFirstWord}}_{% endset %}
+  {% if forceNamespaces == "true" %} {% call casesBlock catalogs.first.assets "color" prefixed_catalog %}{% else %}{% call casesBlock catalogs.first.assets "color" "" %}{% endif %}
+  {% endif %}
+}
+{% else %}
+// No assets found
+{% endif %}

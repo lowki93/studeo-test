@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewsRow: View {
 
-  @Environment(\.redactionReasons) var test
+  @Environment(\.redactionReasons) var redactionReasons
   var news: News
 
   var body: some View {
@@ -21,7 +21,7 @@ struct NewsRow: View {
       .foregroundColor(.secondary)
       HStack(alignment: .top) {
         Group {
-          if let image = news.image, test != .placeholder {
+          if let image = news.image {
             AsyncImage(url: image) { phase in
               switch phase {
               case .success(let image):
@@ -35,11 +35,13 @@ struct NewsRow: View {
               }
             }
           } else {
-            Image(.photoCircle)
-              .resizable()
-              .foregroundColor(.primary)
-              .frame(.ultra)
-              .clipShape(Circle())
+            if redactionReasons == .placeholder {
+              Image(.photoCircle)
+                .resizable()
+                .foregroundColor(.title)
+                .frame(.ultra)
+                .clipShape(Circle())
+            }
           }
         }
         .clipShape(Circle())
