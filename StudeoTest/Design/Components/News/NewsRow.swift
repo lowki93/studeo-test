@@ -13,13 +13,11 @@ struct NewsRow: View {
   var news: News
 
   var body: some View {
-    VStack(alignment: .leading) {
-      HStack {
-        Text(L10n.News.Row.publishedAtFrom(DateFormatter.time(style: .short, date: news.publishedAt), news.source))
-      }
+    VStack(alignment: .leading, spacing: .xSmall) {
+      Text(L10n.News.Row.publishedAtFrom(DateFormatter.time(style: .short, date: news.publishedAt), news.source))
       .font(.caption2)
       .foregroundColor(.secondary)
-      HStack(alignment: .top) {
+      HStack(alignment: .top, spacing: .xSmall) {
         Group {
           if let image = news.image {
             AsyncImage(url: image) { phase in

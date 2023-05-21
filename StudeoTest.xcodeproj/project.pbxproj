@@ -69,6 +69,7 @@
 		6C25AEED2A1ABA4900C119B1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C25AEEC2A1ABA4900C119B1 /* Colors.xcassets */; };
 		6C25AEEF2A1ABACF00C119B1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEEE2A1ABACF00C119B1 /* Colors.swift */; };
 		6C25AEF12A1ABDF900C119B1 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEF02A1ABDF900C119B1 /* Assets.swift */; };
+		6C25AEF32A1ABECE00C119B1 /* VStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25AEF22A1ABECE00C119B1 /* VStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		6C25AEEC2A1ABA4900C119B1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		6C25AEEE2A1ABACF00C119B1 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6C25AEF02A1ABDF900C119B1 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		6C25AEF22A1ABECE00C119B1 /* VStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -542,6 +544,7 @@
 				6C25AEBD2A1A9A0700C119B1 /* Image.swift */,
 				6C25AEC92A1A9C8700C119B1 /* RoundedRectangle.swift */,
 				6C25AEB82A1A993C00C119B1 /* View.swift */,
+				6C25AEF22A1ABECE00C119B1 /* VStack.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -772,6 +775,7 @@
 				6C25AEEF2A1ABACF00C119B1 /* Colors.swift in Sources */,
 				6C25AE572A16312C00C119B1 /* Key.swift in Sources */,
 				6C25AE8B2A165DCF00C119B1 /* URL.swift in Sources */,
+				6C25AEF32A1ABECE00C119B1 /* VStack.swift in Sources */,
 				6C25AECA2A1A9C8700C119B1 /* RoundedRectangle.swift in Sources */,
 				6C25AED22A1AAF1400C119B1 /* NewsRouter.swift in Sources */,
 				6C25AEDC2A1AB79D00C119B1 /* Strings.swift in Sources */,
