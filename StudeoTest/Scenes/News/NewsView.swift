@@ -13,7 +13,11 @@ struct NewsView: View {
 
   var body: some View {
     List(viewModel.news) { news in
-      NewsRow(news: news)
+      Button {
+        viewModel.didTapOnNews(news: news)
+      } label: {
+        NewsRow(news: news)
+      }
     }
     .listStyle(.grouped)
     .navigationTitle("News")

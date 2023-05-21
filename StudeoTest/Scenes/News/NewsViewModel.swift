@@ -12,8 +12,10 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
   @Published var error: Toast.Configuration?
   @Published var news : [News] = News.placeholders
   private var newsWorker: any NewsWorker
+  private let router: any NewsRouting
 
-  init(newsWorker: any NewsWorker) {
+  init(newsWorker: any NewsWorker, router: any NewsRouting) {
+    self.router = router
     self.newsWorker = newsWorker
     self.newsWorker.delegate = self
   }
@@ -26,6 +28,10 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
     } catch {
       self.error = .error(error)
     }
+  }
+
+  func didTapOnNews(news: News) {
+    router.routeToNewDetails(link: news.link)
   }
 }
 

@@ -37,9 +37,11 @@ extension Container {
   private func registerNewsView() {
     register(CustomHostingController<NewsView>.self) { resolver in
       let newsWorker = resolver.resolve(NewsWorker.self)!
-      let viewModel = NewsViewModel(newsWorker: newsWorker)
+      let router = NewsRouter()
+      let viewModel = NewsViewModel(newsWorker: newsWorker, router: router)
       let view = NewsView(viewModel: viewModel)
       let viewController = CustomHostingController(rootView: view, viewLifeCycle: viewModel)
+      router.inject(viewController: viewController)
 
       return viewController
     }
