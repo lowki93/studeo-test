@@ -10,5 +10,5 @@ import Foundation
 enum NewsSource: CaseIterable {
   case newsApi
   case gnews
-//  case mediastack
+  case mediastack
 }

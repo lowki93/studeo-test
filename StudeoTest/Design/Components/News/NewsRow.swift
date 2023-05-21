@@ -21,8 +21,8 @@ struct NewsRow: View {
       .foregroundColor(.secondary)
       HStack(alignment: .top) {
         Group {
-          if test != .placeholder {
-            AsyncImage(url: news.image) { phase in
+          if let image = news.image, test != .placeholder {
+            AsyncImage(url: image) { phase in
               switch phase {
               case .success(let image):
                 image
@@ -37,6 +37,7 @@ struct NewsRow: View {
           } else {
             Image(.photoCircle)
               .resizable()
+              .foregroundColor(.primary)
               .frame(.ultra)
               .clipShape(Circle())
           }

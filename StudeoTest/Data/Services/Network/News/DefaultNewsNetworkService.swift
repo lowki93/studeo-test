@@ -38,11 +38,11 @@ struct DefaultNewsNetworkService: NewsNetworkService {
         url: .gnewsApi.appending(path: NewsPath.search.rawValue),
         params: ["apikey": Key.News.gnews, "q": query, "max": perPage, "lang": "en"]
       )
-//    case .mediastack:
-//      return (
-//        url: .mediastack.appending(path: NewsPath.news.rawValue),
-//        params: ["access_key": Key.News.mediastack, "keywords": query, "limit": perPage, "languages": "en"]
-//      )
+    case .mediastack:
+      return (
+        url: .mediastack.appending(path: NewsPath.news.rawValue),
+        params: ["access_key": Key.News.mediastack, "keywords": query, "limit": perPage, "languages": "en"]
+      )
     }
   }
 
@@ -54,9 +54,9 @@ struct DefaultNewsNetworkService: NewsNetworkService {
     case .gnews:
       let payload = try decoder.decode(SearchGNewsNetworkPayload.self, from: data)
       return try payload.toModel()
-//    case .mediastack:
-//      let payload = try decoder.decode(NewsMediastackNetworkPayload.self, from: data)
-//      return try payload.toModel()
+    case .mediastack:
+      let payload = try decoder.decode(NewsMediastackNetworkPayload.self, from: data)
+      return try payload.toModel()
     }
   }
 }
