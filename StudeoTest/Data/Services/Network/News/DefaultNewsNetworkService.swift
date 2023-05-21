@@ -31,18 +31,18 @@ struct DefaultNewsNetworkService: NewsNetworkService {
     case .newsApi:
       return (
         url: .newsApi.appending(path: NewsPath.everything.rawValue),
-        params: ["apiKey": Key.News.newsApi, "q": query, "pageSize": perPage]
+        params: ["apiKey": Key.News.newsApi, "q": query, "pageSize": perPage, "language": "en"]
       )
     case .gnews:
       return (
         url: .gnewsApi.appending(path: NewsPath.search.rawValue),
-        params: ["apikey": Key.News.gnews, "q": query, "max": perPage]
+        params: ["apikey": Key.News.gnews, "q": query, "max": perPage, "lang": "en"]
       )
-    case .mediastack:
-      return (
-        url: .mediastack.appending(path: NewsPath.news.rawValue),
-        params: ["access_key": Key.News.mediastack, "keywords": query, "limit": perPage]
-      )
+//    case .mediastack:
+//      return (
+//        url: .mediastack.appending(path: NewsPath.news.rawValue),
+//        params: ["access_key": Key.News.mediastack, "keywords": query, "limit": perPage, "languages": "en"]
+//      )
     }
   }
 
@@ -54,9 +54,9 @@ struct DefaultNewsNetworkService: NewsNetworkService {
     case .gnews:
       let payload = try decoder.decode(SearchGNewsNetworkPayload.self, from: data)
       return try payload.toModel()
-    case .mediastack:
-      let payload = try decoder.decode(NewsMediastackNetworkPayload.self, from: data)
-      return try payload.toModel()
+//    case .mediastack:
+//      let payload = try decoder.decode(NewsMediastackNetworkPayload.self, from: data)
+//      return try payload.toModel()
     }
   }
 }

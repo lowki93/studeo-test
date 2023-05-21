@@ -13,5 +13,5 @@ protocol NewsWorker {
 }
 
 protocol NewsWorkerDelegate: AnyObject {
-  func didUpdateNews(_ news: [News], from source: NewsSource)
+  func didUpdateNews(_ news: [News]) async
 }

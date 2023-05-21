@@ -6,29 +6,33 @@
 //
 
 import Foundation
-import Alamofire
 
 final class NewsViewModel: ObservableObject, ViewLifeCycle {
-  private var worker: NewsWorker
 
-  init() {
-    worker = DefaultNewsWorker(newsNetworkService: DefaultNewsNetworkService(client: DefaultNetworkClient(session: Session.default)))
-    worker.delegate = self
+  @Published var error: Toast.Configuration?
+  @Published var news : [News] = News.placeholders
+  private var newsWorker: any NewsWorker
+
+  init(newsWorker: any NewsWorker) {
+    self.newsWorker = newsWorker
+    self.newsWorker.delegate = self
   }
 
+  @MainActor
   func viewDidLoad() async {
     do {
-      let news = try await worker.news(query: "apple", perPage: 2)
-      dump(news)
+      let news = try await newsWorker.news(query: "apple", perPage: 2)
+      self.news = news
     } catch {
-      print("Error ==>\(error)")
+      self.error = .error(error)
     }
   }
 }
 
 extension NewsViewModel: NewsWorkerDelegate {
 
-  func didUpdateNews(_ news: [News], from source: NewsSource) {
-    dump("---> \(source) - \(news.count)")
+  @MainActor
+  func didUpdateNews(_ news: [News]) async {
+    self.news = news
   }
 }

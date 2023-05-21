@@ -12,6 +12,12 @@ struct NewsView: View {
   @ObservedObject var viewModel: NewsViewModel
 
   var body: some View {
-    Text("News")
+    List(viewModel.news) { news in
+      NewsRow(news: news)
+    }
+    .listStyle(.grouped)
+    .navigationTitle("News")
+    .redacted(reason: viewModel.news == News.placeholders ? .placeholder : [])
+    .toast(configuration: $viewModel.error)
   }
 }
