@@ -11,6 +11,15 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
+  internal enum Error {
+    /// An error has occured
+    internal static let unknown = L10n.tr("Localizable", "error.unknown")
+    internal enum Network {
+      /// You are not authorized
+      internal static let unauthorized = L10n.tr("Localizable", "error.network.unauthorized")
+    }
+  }
+
   internal enum News {
     internal enum Navigation {
       /// News

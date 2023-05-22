@@ -18,7 +18,7 @@ struct Toast: View {
   private var message: String {
     switch configuration {
     case .error(let error):
-      return error.localizedDescription
+      return ErrorFormat.localized(from: error)
     }
   }
   private var icon: Symbol {
@@ -30,7 +30,7 @@ struct Toast: View {
   private var backgroundColor: Color {
     switch configuration {
     case .error:
-      return .red
+      return .error
     }
   }
 
@@ -45,6 +45,7 @@ struct Toast: View {
           .font(.body)
           .foregroundColor(.primary)
           .multilineTextAlignment(.center)
+        Spacer()
       }
       .padding(.medium)
       .frame(maxWidth: .infinity)

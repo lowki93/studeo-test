@@ -26,6 +26,7 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
       let news = try await newsWorker.news(query: "apple", perPage: 2)
       self.news = news
     } catch {
+      self.news = []
       self.error = .error(error)
     }
   }
