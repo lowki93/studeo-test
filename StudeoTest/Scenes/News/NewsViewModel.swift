@@ -11,6 +11,9 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
 
   @Published var error: Toast.Configuration?
   @Published var news : [News] = News.placeholders
+  var isLoading: Bool {
+    return news == News.placeholders
+  }
   private var newsWorker: any NewsWorker
   private let router: any NewsRouting
 
@@ -26,7 +29,9 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
       let news = try await newsWorker.news(query: "apple", perPage: 2)
       self.news = news
     } catch {
-      self.news = []
+      if isLoading {
+        news = []
+      }
       self.error = .error(error)
     }
   }

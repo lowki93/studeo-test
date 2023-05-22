@@ -21,7 +21,7 @@ struct NewsView: View {
     }
     .listStyle(.grouped)
     .navigationTitle(L10n.News.Navigation.title)
-    .redacted(reason: viewModel.news == News.placeholders ? .placeholder : [])
+    .redacted(reason: viewModel.isLoading ? .placeholder : [])
     .toast(configuration: $viewModel.error)
   }
 }
