@@ -37,9 +37,7 @@ final class DefaultNewsWorker: NewsWorker {
       for try await value in group {
         news += value
       }
-
       return news
     }
   }
-
 }
