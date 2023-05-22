@@ -20,8 +20,8 @@ struct ArticleNewsApiNetworkPayload: Decodable, ModelConvertible {
   let urlToImage: URL?
   let publishedAt: Date
 
-  func toModel() throws -> News {
-    return News(
+  func toModel() throws -> Article {
+    return Article(
       id: UUID(),
       title: title,
       image: urlToImage,

@@ -9,9 +9,9 @@ import Foundation
 
 protocol NewsWorker {
   var delegate: NewsWorkerDelegate? { get set }
-  func news(query: String, perPage: Int) async throws -> [News]
+  func news(query: String, perPage: Int) async throws -> [Article]
 }
 
 protocol NewsWorkerDelegate: AnyObject {
-  func didUpdateNews(_ news: [News]) async
+  func didUpdateNews(_ articles: [Article]) async
 }

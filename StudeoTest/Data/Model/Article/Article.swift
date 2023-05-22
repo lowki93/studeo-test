@@ -1,5 +1,5 @@
 //
-//  News.swift
+//  Article.swift
 //  StudeoTest
 //
 //  Created by Kevin Budain on 18/05/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct News: Identifiable, Equatable {
+struct Article: Identifiable, Equatable {
   let id: UUID
   let title: String
   let image: URL?
@@ -16,7 +16,7 @@ struct News: Identifiable, Equatable {
   let publishedAt: Date
   let source: String
 
-  static let placeholders: [News] = [
+  static let placeholders: [Article] = [
     placeholder(id: "1"),
     placeholder(id: "2"),
     placeholder(id: "3"),
@@ -28,8 +28,8 @@ struct News: Identifiable, Equatable {
     placeholder(id: "9"),
     placeholder(id: "10")
   ]
-  private static func placeholder(id: String) -> News {
-    return News(
+  private static func placeholder(id: String) -> Article {
+    return Article(
       id: UUID(uuidString: id) ?? UUID(),
       title: "title for plaholder",
       image: nil,

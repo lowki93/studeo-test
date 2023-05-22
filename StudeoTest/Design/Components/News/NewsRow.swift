@@ -10,16 +10,16 @@ import SwiftUI
 struct NewsRow: View {
 
   @Environment(\.redactionReasons) var redactionReasons
-  var news: News
+  var article: Article
 
   var body: some View {
     VStack(alignment: .leading, spacing: .xSmall) {
-      Text(L10n.News.Row.publishedAtFrom(DateFormatter.time(style: .short, date: news.publishedAt), news.source))
+      Text(L10n.News.Row.publishedAtFrom(DateFormatter.time(style: .short, date: article.publishedAt), article.source))
       .font(.caption2)
       .foregroundColor(.secondary)
       HStack(alignment: .top, spacing: .xSmall) {
         Group {
-          if let image = news.image {
+          if let image = article.image {
             AsyncImage(url: image) { phase in
               switch phase {
               case .success(let image):
@@ -44,11 +44,11 @@ struct NewsRow: View {
         }
         .clipShape(Circle())
         .frame(.ultra)
-        Text(news.title)
+        Text(article.title)
           .font(.headline)
           .foregroundColor(.primary)
       }
-      Text(news.description)
+      Text(article.description)
         .font(.subheadline)
         .foregroundColor(.secondary)
     }

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NewsNetworkService {
-  func news(from source: NewsSource, query: String, perPage: Int) async throws -> [News]
+  func news(from source: NewsSource, query: String, perPage: Int) async throws -> [Article]
 }

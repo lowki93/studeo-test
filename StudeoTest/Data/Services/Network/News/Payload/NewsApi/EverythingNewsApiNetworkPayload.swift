@@ -11,7 +11,7 @@ struct EverythingNewsApiNetworkPayload: Decodable, ModelConvertible {
 
   let articles: [ArticleNewsApiNetworkPayload]
 
-  func toModel() throws -> [News] {
+  func toModel() throws -> [Article] {
     return try articles.toDomainModel(.dropFailingElements)
   }
 }

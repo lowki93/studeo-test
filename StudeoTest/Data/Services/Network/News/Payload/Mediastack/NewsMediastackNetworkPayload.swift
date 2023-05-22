@@ -11,7 +11,7 @@ struct NewsMediastackNetworkPayload: Decodable, ModelConvertible {
 
   let data: [ArticleMediastackNetworkPayload]
 
-  func toModel() throws -> [News] {
+  func toModel() throws -> [Article] {
     return try data.toDomainModel(.dropFailingElements)
   }
 }

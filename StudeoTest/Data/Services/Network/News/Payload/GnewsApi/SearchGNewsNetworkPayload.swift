@@ -11,7 +11,7 @@ struct SearchGNewsNetworkPayload: Decodable, ModelConvertible {
 
   let articles: [ArticleGNewsNetworkPayload]
 
-  func toModel() throws -> [News] {
+  func toModel() throws -> [Article] {
     return try articles.toDomainModel(.dropFailingElements)
   }
 }

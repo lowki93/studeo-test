@@ -16,7 +16,7 @@ struct DefaultNewsNetworkService: NewsNetworkService {
     self.client = client
   }
 
-  func news(from source: NewsSource, query: String, perPage: Int) async throws -> [News] {
+  func news(from source: NewsSource, query: String, perPage: Int) async throws -> [Article] {
     let endpoint = generateNewsEndpoint(source: source, query: query, perPage: perPage)
     let data = try await client.request(url: endpoint.url, method: .get, parameters: endpoint.params)
     do {
@@ -46,7 +46,7 @@ struct DefaultNewsNetworkService: NewsNetworkService {
     }
   }
 
-  private func decodingNews(data: Data, from source: NewsSource) throws -> [News] {
+  private func decodingNews(data: Data, from source: NewsSource) throws -> [Article] {
     switch source {
     case .newsApi:
       let payload = try decoder.decode(EverythingNewsApiNetworkPayload.self, from: data)

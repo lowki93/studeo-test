@@ -10,16 +10,16 @@ import Foundation
 final class DefaultNewsWorker: NewsWorker {
 
   weak var delegate: NewsWorkerDelegate?
-  private var news: [News] = []
+  private var news: [Article] = []
   private let newsNetworkService: any NewsNetworkService
 
   init(newsNetworkService: any NewsNetworkService) {
     self.newsNetworkService = newsNetworkService
   }
 
-  func news(query: String, perPage: Int) async throws -> [News] {
+  func news(query: String, perPage: Int) async throws -> [Article] {
     news.removeAll()
-    return try await withThrowingTaskGroup(of: [News].self) { group in
+    return try await withThrowingTaskGroup(of: [Article].self) { group in
       for source in NewsSource.allCases {
         group.addTask {
           do {
@@ -33,7 +33,7 @@ final class DefaultNewsWorker: NewsWorker {
         }
       }
 
-      var news: [News] = []
+      var news: [Article] = []
       for try await value in group {
         news += value
       }

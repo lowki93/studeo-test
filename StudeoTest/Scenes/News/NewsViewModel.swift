@@ -10,9 +10,9 @@ import Foundation
 final class NewsViewModel: ObservableObject, ViewLifeCycle {
 
   @Published var error: Toast.Configuration?
-  @Published var news : [News] = News.placeholders
+  @Published var articles : [Article] = Article.placeholders
   var isLoading: Bool {
-    return news == News.placeholders
+    return articles == Article.placeholders
   }
   private var newsWorker: any NewsWorker
   private let router: any NewsRouting
@@ -27,24 +27,24 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
   func viewDidLoad() async {
     do {
       let news = try await newsWorker.news(query: "apple", perPage: 2)
-      self.news = news
+      self.articles = news
     } catch {
       if isLoading {
-        news = []
+        articles = []
       }
       self.error = .error(error)
     }
   }
 
-  func didTapOnNews(news: News) {
-    router.routeToNewDetails(link: news.link)
+  func didTapOnNews(article: Article) {
+    router.routeToNewDetails(link: article.link)
   }
 }
 
 extension NewsViewModel: NewsWorkerDelegate {
 
   @MainActor
-  func didUpdateNews(_ news: [News]) async {
-    self.news = news
+  func didUpdateNews(_ news: [Article]) async {
+    self.articles = news
   }
 }

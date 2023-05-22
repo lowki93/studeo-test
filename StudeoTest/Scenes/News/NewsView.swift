@@ -12,11 +12,11 @@ struct NewsView: View {
   @ObservedObject var viewModel: NewsViewModel
 
   var body: some View {
-    List(viewModel.news) { news in
+    List(viewModel.articles) { article in
       Button {
-        viewModel.didTapOnNews(news: news)
+        viewModel.didTapOnNews(article: article)
       } label: {
-        NewsRow(news: news)
+        NewsRow(article: article)
       }
     }
     .listStyle(.grouped)

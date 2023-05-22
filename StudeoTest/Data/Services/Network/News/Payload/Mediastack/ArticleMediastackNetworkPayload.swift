@@ -16,8 +16,8 @@ struct ArticleMediastackNetworkPayload: Decodable, ModelConvertible {
   let publishedAt: Date
   let source: String
 
-  func toModel() throws -> News {
-    return News(
+  func toModel() throws -> Article {
+    return Article(
       id: UUID(),
       title: title,
       image: image,
