@@ -8,9 +8,9 @@
 import InstantMock
 @testable import StudeoTest
 
-final class ArticleWorkerDelegateMock: Mock, NewsWorkerDelegate {
+final class ArticleWorkerDelegateMock: Mock, ArticleWorkerDelegate {
 
-  func didUpdateNews(_ news: [News]) async {
-    super.call(news)
+  func didUpdateNews(_ articles: [Article]) async {
+    super.call(articles)
   }
 }

@@ -18,7 +18,7 @@ final class ArticlesViewModelTests: XCTestCase {
   override func setUp() {
     articleWorker = ArticleWorkerMock()
     router = ArticlesRoutingMock()
-    viewModel = NewsViewModel(newsWorker: articleWorker, router: router)
+    viewModel = NewsViewModel(articleWorker: articleWorker, router: router)
   }
 
   func test_viewDidLoad_ok() async throws {
@@ -39,7 +39,7 @@ final class ArticlesViewModelTests: XCTestCase {
 
     XCTAssertEqual(queryCaptor.allValues, [expectedQuery])
     XCTAssertEqual(perPageCaptor.allValues, [expectedPerPage])
-    XCTAssertEqual(viewModel.news, expectedArticles)
+    XCTAssertEqual(viewModel.articles, expectedArticles)
     XCTAssertNil(viewModel.error)
   }
 
@@ -61,7 +61,7 @@ final class ArticlesViewModelTests: XCTestCase {
 
     XCTAssertEqual(queryCaptor.allValues, [expectedQuery])
     XCTAssertEqual(perPageCaptor.allValues, [expectedPerPage])
-    XCTAssertEqual(viewModel.news, [])
+    XCTAssertEqual(viewModel.articles, [])
     XCTAssertEqual(viewModel.error, .error(expectedError))
   }
 
@@ -73,7 +73,7 @@ final class ArticlesViewModelTests: XCTestCase {
     let queryCaptor = ArgumentCaptor<String>()
     let perPageCaptor = ArgumentCaptor<Int>()
 
-    viewModel.news = expectedArticles
+    viewModel.articles = expectedArticles
     try await articleWorker
       .expect()
       .call(articleWorker.news(query: queryCaptor.capture(), perPage: perPageCaptor.capture()), count: 1)
@@ -85,7 +85,7 @@ final class ArticlesViewModelTests: XCTestCase {
 
     XCTAssertEqual(queryCaptor.allValues, [expectedQuery])
     XCTAssertEqual(perPageCaptor.allValues, [expectedPerPage])
-    XCTAssertEqual(viewModel.news, expectedArticles)
+    XCTAssertEqual(viewModel.articles, expectedArticles)
     XCTAssertEqual(viewModel.error, .error(expectedError))
   }
 
@@ -97,17 +97,17 @@ final class ArticlesViewModelTests: XCTestCase {
       .expect()
       .call(router.routeToNewDetails(link: linkCaptor.capture()), count: 1)
 
-    viewModel.didTapOnNews(news: expectedArticle)
+    viewModel.didTapOnNews(article: expectedArticle)
 
     router.verify()
   }
 
-  // MARK: - NewsWorkerDelegate
+  // MARK: - ArticleWorkerDelegate
   func test_didUpdateNews_ok() async {
     let expectedArticles = TestObjectFactory.createArticles()
 
     await articleWorker.delegate?.didUpdateNews(expectedArticles)
 
-    XCTAssertEqual(viewModel.news, expectedArticles)
+    XCTAssertEqual(viewModel.articles, expectedArticles)
   }
 }

@@ -8,14 +8,14 @@
 import InstantMock
 @testable import StudeoTest
 
-extension News: MockUsable {
+extension Article: MockUsable {
 
   public static var anyValue: MockUsable {
     return TestObjectFactory.createArticle()
   }
 
   public func equal(to value: MockUsable?) -> Bool {
-    guard let value = value as? News else { return false }
+    guard let value = value as? Article else { return false }
     return self == value
   }
 }

@@ -16,8 +16,8 @@ enum TestObjectFactory {
   }
 
   // MARK: - Model
-  static func createArticle() -> News {
-    return News(
+  static func createArticle() -> Article {
+    return Article(
       id: UUID(), title: createRandomString(),
       image: nil,
       description: createRandomString(),
@@ -27,11 +27,11 @@ enum TestObjectFactory {
     )
   }
 
-  static func createArticles() -> [News] {
+  static func createArticles() -> [Article] {
     return Array(repeating: createArticle(), count: createRandomInt())
   }
 
-  static func createArticleSource() -> NewsSource {
+  static func createArticleSource() -> ArticleSource {
     return [.newsApi, .gnews, .mediastack].randomElement() ?? .newsApi
   }
 

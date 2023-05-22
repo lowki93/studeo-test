@@ -27,7 +27,7 @@ extension Container {
   }
 
   func registerWorkers() {
-    autoregister(NewsWorker.self, initializer: DefaultNewsWorker.init)
+    autoregister(ArticleWorker.self, initializer: DefaultArticleWorker.init)
   }
 
   private func registerScenes() {
@@ -36,9 +36,9 @@ extension Container {
 
   private func registerNewsView() {
     register(CustomHostingController<NewsView>.self) { resolver in
-      let newsWorker = resolver.resolve(NewsWorker.self)!
+      let articleWorker = resolver.resolve(ArticleWorker.self)!
       let router = NewsRouter()
-      let viewModel = NewsViewModel(newsWorker: newsWorker, router: router)
+      let viewModel = NewsViewModel(articleWorker: articleWorker, router: router)
       let view = NewsView(viewModel: viewModel)
       let viewController = CustomHostingController(rootView: view, viewLifeCycle: viewModel)
       router.inject(viewController: viewController)

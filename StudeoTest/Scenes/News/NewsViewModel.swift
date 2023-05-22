@@ -14,19 +14,19 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
   var isLoading: Bool {
     return articles == Article.placeholders
   }
-  private var newsWorker: any NewsWorker
+  private var articleWorker: any ArticleWorker
   private let router: any NewsRouting
 
-  init(newsWorker: any NewsWorker, router: any NewsRouting) {
+  init(articleWorker: any ArticleWorker, router: any NewsRouting) {
     self.router = router
-    self.newsWorker = newsWorker
-    self.newsWorker.delegate = self
+    self.articleWorker = articleWorker
+    self.articleWorker.delegate = self
   }
 
   @MainActor
   func viewDidLoad() async {
     do {
-      let news = try await newsWorker.news(query: "apple", perPage: 2)
+      let news = try await articleWorker.news(query: "apple", perPage: 2)
       self.articles = news
     } catch {
       if isLoading {
@@ -41,7 +41,7 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
   }
 }
 
-extension NewsViewModel: NewsWorkerDelegate {
+extension NewsViewModel: ArticleWorkerDelegate {
 
   @MainActor
   func didUpdateNews(_ news: [Article]) async {

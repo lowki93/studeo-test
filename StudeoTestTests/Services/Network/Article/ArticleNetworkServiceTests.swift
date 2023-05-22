@@ -23,7 +23,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
   }
 
   func test_news_ok_newsApi() async throws {
-    let source: NewsSource = .newsApi
+    let source: ArticleSource = .newsApi
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "newsApi-200", statusCode: 200)
@@ -42,7 +42,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
   }
 
   func test_news_ko_401_newsApi() async throws {
-    let source: NewsSource = .newsApi
+    let source: ArticleSource = .newsApi
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "error-401", statusCode: 401)
@@ -53,7 +53,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
   }
 
   func test_news_ok_gnews() async throws {
-    let source: NewsSource = .gnews
+    let source: ArticleSource = .gnews
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "gnews-200", statusCode: 200)
@@ -72,7 +72,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
   }
 
   func test_news_ko_401_gnews() async throws {
-    let source: NewsSource = .gnews
+    let source: ArticleSource = .gnews
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "error-401", statusCode: 401)
@@ -83,7 +83,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
   }
 
   func test_mediastack_ok_gnews() async throws {
-    let source: NewsSource = .mediastack
+    let source: ArticleSource = .mediastack
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "mediastack-200", statusCode: 200)

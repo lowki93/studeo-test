@@ -9,16 +9,16 @@ import XCTest
 import InstantMock
 @testable import StudeoTest
 
-final class ArticleWorker: XCTestCase {
+final class ArticleWorkerTests: XCTestCase {
 
-  private var worker: NewsWorker!
+  private var worker: ArticleWorker!
   private var delegate: ArticleWorkerDelegateMock!
   private var articleNetworkService: ArticleNetworkServiceMock!
 
   override func setUp() {
     delegate = ArticleWorkerDelegateMock()
     articleNetworkService = ArticleNetworkServiceMock()
-    worker = DefaultNewsWorker(newsNetworkService: articleNetworkService)
+    worker = DefaultArticleWorker(newsNetworkService: articleNetworkService)
     worker.delegate = delegate
   }
 
@@ -35,15 +35,15 @@ final class ArticleWorker: XCTestCase {
     /// We can use a captor for the `source`. We should add  an expect for each source
     try await articleNetworkService
       .expect()
-      .call(articleNetworkService.news(from: Arg.eq(NewsSource.newsApi), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
+      .call(articleNetworkService.news(from: Arg.eq(ArticleSource.newsApi), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
       .andReturn(expectedNewsApiArticles)
     try await articleNetworkService
       .expect()
-      .call(articleNetworkService.news(from: Arg.eq(NewsSource.gnews), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
+      .call(articleNetworkService.news(from: Arg.eq(ArticleSource.gnews), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
       .andReturn(expectedGnewsArticles)
     try await articleNetworkService
       .expect()
-      .call(articleNetworkService.news(from: Arg.eq(NewsSource.mediastack), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
+      .call(articleNetworkService.news(from: Arg.eq(ArticleSource.mediastack), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
       .andReturn(expectedMediastackApiArticles)
     await delegate
       .expect()

@@ -8,11 +8,11 @@
 import InstantMock
 @testable import StudeoTest
 
-final class ArticleWorkerMock: Mock, NewsWorker {
+final class ArticleWorkerMock: Mock, ArticleWorker {
 
-  var delegate: NewsWorkerDelegate?
+  var delegate: ArticleWorkerDelegate?
 
-  func news(query: String, perPage: Int) async throws -> [News] {
+  func news(query: String, perPage: Int) async throws -> [Article] {
     return try super.callThrowing(query, perPage)!
   }
 }
