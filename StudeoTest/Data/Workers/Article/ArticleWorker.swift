@@ -9,7 +9,7 @@ import Foundation
 
 protocol ArticleWorker {
   var delegate: ArticleWorkerDelegate? { get set }
-  func news(query: String, perPage: Int) async throws -> [Article]
+  func articles(query: String, perPage: Int) async throws -> [Article]
 }
 
 protocol ArticleWorkerDelegate: AnyObject {

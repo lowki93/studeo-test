@@ -10,11 +10,11 @@ import XCTest
 
 final class ArticleNetworkServiceTests: XCTestCase {
 
-  private var service: NewsNetworkService!
+  private var service: ArticleNetworkService!
 
   override func setUp() {
     super.setUp()
-    service = DefaultNewsNetworkService(client: createNetworkClient())
+    service = DefaultArticleNetworkService(client: createNetworkClient())
   }
 
   override func tearDown() {
@@ -22,13 +22,13 @@ final class ArticleNetworkServiceTests: XCTestCase {
     super.tearDown()
   }
 
-  func test_news_ok_newsApi() async throws {
+  func test_article_ok_newsApi() async throws {
     let source: ArticleSource = .newsApi
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "newsApi-200", statusCode: 200)
 
-    let articles = try await service.news(from: source, query: query, perPage: perPage)
+    let articles = try await service.articles(from: source, query: query, perPage: perPage)
 
     XCTAssertEqual(articles.count, 1)
 
@@ -41,24 +41,24 @@ final class ArticleNetworkServiceTests: XCTestCase {
     XCTAssertEqual(article.source, "source-name")
   }
 
-  func test_news_ko_401_newsApi() async throws {
+  func test_article_ko_401_newsApi() async throws {
     let source: ArticleSource = .newsApi
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "error-401", statusCode: 401)
 
-    await XCTAssertAsyncThrowsError(try await service.news(from: source, query: query, perPage: perPage)) { error in
+    await XCTAssertAsyncThrowsError(try await service.articles(from: source, query: query, perPage: perPage)) { error in
       XCTAssertEqual(error as! NetworkError, .unauthorized)
     }
   }
 
-  func test_news_ok_gnews() async throws {
+  func test_article_ok_garticles() async throws {
     let source: ArticleSource = .gnews
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "gnews-200", statusCode: 200)
 
-    let articles = try await service.news(from: source, query: query, perPage: perPage)
+    let articles = try await service.articles(from: source, query: query, perPage: perPage)
 
     XCTAssertEqual(articles.count, 1)
 
@@ -71,24 +71,24 @@ final class ArticleNetworkServiceTests: XCTestCase {
     XCTAssertEqual(article.source, "source-name")
   }
 
-  func test_news_ko_401_gnews() async throws {
+  func test_article_ko_401_garticles() async throws {
     let source: ArticleSource = .gnews
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "error-401", statusCode: 401)
 
-    await XCTAssertAsyncThrowsError(try await service.news(from: source, query: query, perPage: perPage)) { error in
+    await XCTAssertAsyncThrowsError(try await service.articles(from: source, query: query, perPage: perPage)) { error in
       XCTAssertEqual(error as! NetworkError, .unauthorized)
     }
   }
 
-  func test_mediastack_ok_gnews() async throws {
+  func test_mediastack_ok_garticles() async throws {
     let source: ArticleSource = .mediastack
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "mediastack-200", statusCode: 200)
 
-    let articles = try await service.news(from: source, query: query, perPage: perPage)
+    let articles = try await service.articles(from: source, query: query, perPage: perPage)
 
     XCTAssertEqual(articles.count, 1)
 

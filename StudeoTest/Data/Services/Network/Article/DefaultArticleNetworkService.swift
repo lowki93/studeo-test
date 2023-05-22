@@ -1,5 +1,5 @@
 //
-//  DefaultNewsNetworkService.swift
+//  DefaultArticleNetworkService.swift
 //  StudeoTest
 //
 //  Created by Kevin Budain on 18/05/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DefaultNewsNetworkService: NewsNetworkService {
+struct DefaultArticleNetworkService: ArticleNetworkService {
 
   private let client: any NetworkClient
   private let decoder: any DecoderService = DefaultDecoderService()
@@ -16,7 +16,7 @@ struct DefaultNewsNetworkService: NewsNetworkService {
     self.client = client
   }
 
-  func news(from source: ArticleSource, query: String, perPage: Int) async throws -> [Article] {
+  func articles(from source: ArticleSource, query: String, perPage: Int) async throws -> [Article] {
     let endpoint = generateNewsEndpoint(source: source, query: query, perPage: perPage)
     let data = try await client.request(url: endpoint.url, method: .get, parameters: endpoint.params)
     do {

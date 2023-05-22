@@ -30,7 +30,7 @@ final class ArticlesViewModelTests: XCTestCase {
 
     try await articleWorker
       .expect()
-      .call(articleWorker.news(query: queryCaptor.capture(), perPage: perPageCaptor.capture()), count: 1)
+      .call(articleWorker.articles(query: queryCaptor.capture(), perPage: perPageCaptor.capture()), count: 1)
       .andReturn(expectedArticles)
 
     await viewModel.viewDidLoad()
@@ -52,7 +52,7 @@ final class ArticlesViewModelTests: XCTestCase {
 
     try await articleWorker
       .expect()
-      .call(articleWorker.news(query: queryCaptor.capture(), perPage: perPageCaptor.capture()), count: 1)
+      .call(articleWorker.articles(query: queryCaptor.capture(), perPage: perPageCaptor.capture()), count: 1)
       .andThrow(expectedError)
 
     await viewModel.viewDidLoad()
@@ -76,7 +76,7 @@ final class ArticlesViewModelTests: XCTestCase {
     viewModel.articles = expectedArticles
     try await articleWorker
       .expect()
-      .call(articleWorker.news(query: queryCaptor.capture(), perPage: perPageCaptor.capture()), count: 1)
+      .call(articleWorker.articles(query: queryCaptor.capture(), perPage: perPageCaptor.capture()), count: 1)
       .andThrow(expectedError)
 
     await viewModel.viewDidLoad()

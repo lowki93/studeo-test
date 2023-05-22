@@ -8,9 +8,9 @@
 import InstantMock
 @testable import StudeoTest
 
-final class ArticleNetworkServiceMock: Mock, NewsNetworkService {
+final class ArticleNetworkServiceMock: Mock, ArticleNetworkService {
 
-  func news(from source: ArticleSource, query: String, perPage: Int) async throws -> [Article] {
+  func articles(from source: ArticleSource, query: String, perPage: Int) async throws -> [Article] {
     return try super.callThrowing(source, query, perPage)!
   }
 

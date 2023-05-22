@@ -9,35 +9,35 @@ import Foundation
 
 final class DefaultArticleWorker: ArticleWorker {
 
-  weak var delegate: ArticleWorkerDelegate?
-  private var news: [Article] = []
-  private let newsNetworkService: any NewsNetworkService
+  weak var delegate: ArticleWorkerDelegate? 
+  private var articles: [Article] = []
+  private let articleNetworkService: any ArticleNetworkService
 
-  init(newsNetworkService: any NewsNetworkService) {
-    self.newsNetworkService = newsNetworkService
+  init(articleNetworkService: any ArticleNetworkService) {
+    self.articleNetworkService = articleNetworkService
   }
 
-  func news(query: String, perPage: Int) async throws -> [Article] {
-    news.removeAll()
+  func articles(query: String, perPage: Int) async throws -> [Article] {
+    articles.removeAll()
     return try await withThrowingTaskGroup(of: [Article].self) { group in
       for source in ArticleSource.allCases {
         group.addTask {
           do {
-            let news = try await self.newsNetworkService.news(from: source, query: query, perPage: perPage)
-            self.news += news
-            await self.delegate?.didUpdateNews(self.news)
-            return news
+            let articles = try await self.articleNetworkService.articles(from: source, query: query, perPage: perPage)
+            self.articles += articles
+            await self.delegate?.didUpdateNews(self.articles)
+            return articles
           } catch {
             throw error
           }
         }
       }
 
-      var news: [Article] = []
+      var articles: [Article] = []
       for try await value in group {
-        news += value
+        articles += value
       }
-      return news
+      return articles
     }
   }
 }

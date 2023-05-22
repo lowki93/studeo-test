@@ -18,7 +18,7 @@ final class ArticleWorkerTests: XCTestCase {
   override func setUp() {
     delegate = ArticleWorkerDelegateMock()
     articleNetworkService = ArticleNetworkServiceMock()
-    worker = DefaultArticleWorker(newsNetworkService: articleNetworkService)
+    worker = DefaultArticleWorker(articleNetworkService: articleNetworkService)
     worker.delegate = delegate
   }
 
@@ -31,25 +31,25 @@ final class ArticleWorkerTests: XCTestCase {
 
     try await articleNetworkService
       .expect()
-      .call(articleNetworkService.news(from: Arg.any(), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 3)
+      .call(articleNetworkService.articles(from: Arg.any(), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 3)
     /// We can use a captor for the `source`. We should add  an expect for each source
     try await articleNetworkService
       .expect()
-      .call(articleNetworkService.news(from: Arg.eq(ArticleSource.newsApi), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
+      .call(articleNetworkService.articles(from: Arg.eq(ArticleSource.newsApi), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
       .andReturn(expectedNewsApiArticles)
     try await articleNetworkService
       .expect()
-      .call(articleNetworkService.news(from: Arg.eq(ArticleSource.gnews), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
+      .call(articleNetworkService.articles(from: Arg.eq(ArticleSource.gnews), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
       .andReturn(expectedGnewsArticles)
     try await articleNetworkService
       .expect()
-      .call(articleNetworkService.news(from: Arg.eq(ArticleSource.mediastack), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
+      .call(articleNetworkService.articles(from: Arg.eq(ArticleSource.mediastack), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
       .andReturn(expectedMediastackApiArticles)
     await delegate
       .expect()
       .call(delegate.didUpdateNews(Arg.any()), count: 3)
 
-    let results = try await worker.news(query: expectedQuery, perPage: expectedPerPage)
+    let results = try await worker.articles(query: expectedQuery, perPage: expectedPerPage)
 
     articleNetworkService.verify()
     delegate.verify()

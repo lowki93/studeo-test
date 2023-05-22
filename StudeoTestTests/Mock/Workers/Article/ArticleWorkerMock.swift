@@ -12,7 +12,7 @@ final class ArticleWorkerMock: Mock, ArticleWorker {
 
   var delegate: ArticleWorkerDelegate?
 
-  func news(query: String, perPage: Int) async throws -> [Article] {
+  func articles(query: String, perPage: Int) async throws -> [Article] {
     return try super.callThrowing(query, perPage)!
   }
 }

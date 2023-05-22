@@ -26,8 +26,8 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
   @MainActor
   func viewDidLoad() async {
     do {
-      let news = try await articleWorker.news(query: "apple", perPage: 2)
-      self.articles = news
+      let articles = try await articleWorker.articles(query: "apple", perPage: 2)
+      self.articles = articles
     } catch {
       if isLoading {
         articles = []
@@ -44,7 +44,7 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
 extension NewsViewModel: ArticleWorkerDelegate {
 
   @MainActor
-  func didUpdateNews(_ news: [Article]) async {
-    self.articles = news
+  func didUpdateNews(_ articles: [Article]) async {
+    self.articles = articles
   }
 }

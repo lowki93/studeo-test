@@ -23,7 +23,7 @@ extension Container {
   func registerNetworks() {
     autoregister(Session.self) { Session.default }
     autoregister(NetworkClient.self, initializer: DefaultNetworkClient.init).inObjectScope(.container)
-    autoregister(NewsNetworkService.self, initializer: DefaultNewsNetworkService.init)
+    autoregister(ArticleNetworkService.self, initializer: DefaultArticleNetworkService.init)
   }
 
   func registerWorkers() {
