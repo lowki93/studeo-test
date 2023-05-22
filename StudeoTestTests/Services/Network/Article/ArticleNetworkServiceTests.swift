@@ -22,7 +22,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
     super.tearDown()
   }
 
-  func test_article_ok_newsApi() async throws {
+  func test_articles_ok_newsApi() async throws {
     let source: ArticleSource = .newsApi
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
@@ -41,7 +41,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
     XCTAssertEqual(article.source, "source-name")
   }
 
-  func test_article_ko_401_newsApi() async throws {
+  func test_articles_ko_401_newsApi() async throws {
     let source: ArticleSource = .newsApi
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
@@ -52,7 +52,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
     }
   }
 
-  func test_article_ok_garticles() async throws {
+  func test_articles_ok_garticles() async throws {
     let source: ArticleSource = .gnews
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
@@ -71,7 +71,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
     XCTAssertEqual(article.source, "source-name")
   }
 
-  func test_article_ko_401_garticles() async throws {
+  func test_articles_ko_401_garticles() async throws {
     let source: ArticleSource = .gnews
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
@@ -82,7 +82,7 @@ final class ArticleNetworkServiceTests: XCTestCase {
     }
   }
 
-  func test_mediastack_ok_garticles() async throws {
+  func test_articles_ok_mediastack() async throws {
     let source: ArticleSource = .mediastack
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
@@ -99,5 +99,16 @@ final class ArticleNetworkServiceTests: XCTestCase {
     XCTAssertEqual(article.link, URL(stringLiteral: "https://google.com"))
     XCTAssertEqual(article.publishedAt.description, "2023-05-21 11:00:00 +0000")
     XCTAssertEqual(article.source, "source-name")
+  }
+
+  func test_articles_ko_401_mediastack() async throws {
+    let source: ArticleSource = .mediastack
+    let query = TestObjectFactory.createRandomString()
+    let perPage = TestObjectFactory.createRandomInt()
+    setupStub(forFile: "error-401", statusCode: 401)
+
+    await XCTAssertAsyncThrowsError(try await service.articles(from: source, query: query, perPage: perPage)) { error in
+      XCTAssertEqual(error as! NetworkError, .unauthorized)
+    }
   }
 }

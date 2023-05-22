@@ -9,7 +9,7 @@ import Foundation
 
 final class DefaultArticleWorker: ArticleWorker {
 
-  weak var delegate: ArticleWorkerDelegate? 
+  weak var delegate: ArticleWorkerDelegate?
   private var articles: [Article] = []
   private let articleNetworkService: any ArticleNetworkService
 
