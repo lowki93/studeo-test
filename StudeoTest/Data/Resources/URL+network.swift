@@ -11,5 +11,5 @@ extension URL {
 
   static let newsApi = URL(stringLiteral: "https://newsapi.org/v2")
   static let gnewsApi = URL(stringLiteral: "https://gnews.io/api/v4")
-  static let mediastack = URL(stringLiteral: "http://api.mediastack.com/v1")
+  static let theNewsApi = URL(stringLiteral: "https://api.thenewsapi.com/v1")
 }

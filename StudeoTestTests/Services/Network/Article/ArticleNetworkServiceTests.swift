@@ -82,11 +82,11 @@ final class ArticleNetworkServiceTests: XCTestCase {
     }
   }
 
-  func test_articles_ok_mediastack() async throws {
-    let source: ArticleSource = .mediastack
+  func test_articles_ok_theNewsApi() async throws {
+    let source: ArticleSource = .theNewsApi
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
-    setupStub(forFile: "mediastack-200", statusCode: 200)
+    setupStub(forFile: "theNewsApi-200", statusCode: 200)
 
     let articles = try await service.articles(from: source, query: query, perPage: perPage)
 
@@ -101,8 +101,8 @@ final class ArticleNetworkServiceTests: XCTestCase {
     XCTAssertEqual(article.source, "source-name")
   }
 
-  func test_articles_ko_401_mediastack() async throws {
-    let source: ArticleSource = .mediastack
+  func test_articles_ko_401_theNewsApi() async throws {
+    let source: ArticleSource = .theNewsApi
     let query = TestObjectFactory.createRandomString()
     let perPage = TestObjectFactory.createRandomInt()
     setupStub(forFile: "error-401", statusCode: 401)

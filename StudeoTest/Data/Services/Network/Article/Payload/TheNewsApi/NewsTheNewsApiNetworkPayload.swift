@@ -1,5 +1,5 @@
 //
-//  NewsMediastackNetworkPayload.swift
+//  NewsTheNewsApiNetworkPayload.swift
 //  StudeoTest
 //
 //  Created by Kevin Budain on 19/05/2023.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct NewsMediastackNetworkPayload: Decodable, ModelConvertible {
+struct NewsTheNewsApiNetworkPayload: Decodable, ModelConvertible {
 
-  let data: [ArticleMediastackNetworkPayload]
+  let data: [ArticleTheNewsApiNetworkPayload]
 
   func toModel() throws -> [Article] {
     return try data.toDomainModel(.dropFailingElements)

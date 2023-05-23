@@ -32,7 +32,7 @@ enum TestObjectFactory {
   }
 
   static func createArticleSource() -> ArticleSource {
-    return [.newsApi, .gnews, .mediastack].randomElement() ?? .newsApi
+    return [.newsApi, .gnews, .theNewsApi].randomElement() ?? .newsApi
   }
 
   static func createArticleUpdate() -> ArticleUpdate {

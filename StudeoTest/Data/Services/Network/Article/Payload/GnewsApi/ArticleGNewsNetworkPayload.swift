@@ -18,7 +18,7 @@ struct ArticleGNewsNetworkPayload: Decodable, ModelConvertible {
   let description: String
   let url: URL
   let image: URL?
-  let publishedAt: Date
+  @DateFormat<Iso8601> var publishedAt: Date
 
   func toModel() throws -> Article {
     return Article(

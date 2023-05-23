@@ -27,7 +27,7 @@ final class ArticleWorkerTests: XCTestCase {
     let expectedPerPage = TestObjectFactory.createRandomInt()
     let expectedNewsApiArticles = [TestObjectFactory.createArticle()]
     let expectedGnewsArticles = [TestObjectFactory.createArticle()]
-    let expectedMediastackApiArticles = [TestObjectFactory.createArticle()]
+    let expectedTheNewsApiApiArticles = [TestObjectFactory.createArticle()]
 
     try await articleNetworkService
       .expect()
@@ -43,8 +43,8 @@ final class ArticleWorkerTests: XCTestCase {
       .andReturn(expectedGnewsArticles)
     try await articleNetworkService
       .expect()
-      .call(articleNetworkService.articles(from: Arg.eq(ArticleSource.mediastack), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
-      .andReturn(expectedMediastackApiArticles)
+      .call(articleNetworkService.articles(from: Arg.eq(ArticleSource.theNewsApi), query: Arg.eq(expectedQuery), perPage: Arg.eq(expectedPerPage)), count: 1)
+      .andReturn(expectedTheNewsApiApiArticles)
     delegate
       .expect()
       .call(delegate.didUpdateArticles(Arg.any(), type: Arg.any()), count: 3)
@@ -57,7 +57,7 @@ final class ArticleWorkerTests: XCTestCase {
     XCTAssertEqual(results.count, 3)
     XCTAssertTrue(results.contains(expectedNewsApiArticles))
     XCTAssertTrue(results.contains(expectedGnewsArticles))
-    XCTAssertTrue(results.contains(expectedMediastackApiArticles))
+    XCTAssertTrue(results.contains(expectedTheNewsApiApiArticles))
   }
 
 //  func test_articles_ko_newsApi_failed() async throws {

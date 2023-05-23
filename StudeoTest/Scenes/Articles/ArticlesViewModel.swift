@@ -32,6 +32,7 @@ final class ArticlesViewModel: ObservableObject, ViewLifeCycle {
       if isLoading {
         articles = []
       }
+      dump(error)
       self.error = .error(error)
     }
   }

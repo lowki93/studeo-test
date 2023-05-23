@@ -1,5 +1,5 @@
 //
-//  NewsPath.swift
+//  ArticlePath.swift
 //  StudeoTest
 //
 //  Created by Kevin Budain on 18/05/2023.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum NewsPath: NetworkPath {
+enum ArticlePath: NetworkPath {
   case everything
   case search
-  case news
+  case all
 
   var rawValue: String {
     switch self {
@@ -18,8 +18,8 @@ enum NewsPath: NetworkPath {
       return "/everything"
     case .search:
       return "/search"
-    case .news:
-      return "/news"
+    case .all:
+      return "/news/all"
     }
   }
 }
