@@ -10,7 +10,7 @@ import Foundation
 final class DefaultArticleWorker: ArticleWorker {
 
   weak var delegate: ArticleWorkerDelegate?
-  private var articles: [Article] = []
+  private var sources: [ArticleSource] = []
   private let articleNetworkService: any ArticleNetworkService
 
   init(articleNetworkService: any ArticleNetworkService) {
@@ -18,14 +18,14 @@ final class DefaultArticleWorker: ArticleWorker {
   }
 
   func articles(query: String, perPage: Int) async throws -> [Article] {
-    articles.removeAll()
+    sources.removeAll()
     return try await withThrowingTaskGroup(of: [Article].self) { group in
       for source in ArticleSource.allCases {
         group.addTask {
           do {
             let articles = try await self.articleNetworkService.articles(from: source, query: query, perPage: perPage)
-            self.articles += articles
-            await self.delegate?.didUpdateNews(self.articles)
+            self.sources.append(source)
+            await self.delegate?.didUpdateArticles(articles, type: self.sources.count == 1 ? .reset : .update)
             return articles
           } catch {
             throw error

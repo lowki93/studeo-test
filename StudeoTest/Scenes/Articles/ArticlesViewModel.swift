@@ -1,5 +1,5 @@
 //
-//  NewsViewModel.swift
+//  ArticlesViewModel.swift
 //  StudeoTest
 //
 //  Created by Kevin Budain on 18/05/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class NewsViewModel: ObservableObject, ViewLifeCycle {
+final class ArticlesViewModel: ObservableObject, ViewLifeCycle {
 
   @Published var error: Toast.Configuration?
   @Published var articles : [Article] = Article.placeholders
@@ -15,9 +15,9 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
     return articles == Article.placeholders
   }
   private var articleWorker: any ArticleWorker
-  private let router: any NewsRouting
+  private let router: any ArticlesRouting
 
-  init(articleWorker: any ArticleWorker, router: any NewsRouting) {
+  init(articleWorker: any ArticleWorker, router: any ArticlesRouting) {
     self.router = router
     self.articleWorker = articleWorker
     self.articleWorker.delegate = self
@@ -36,15 +36,20 @@ final class NewsViewModel: ObservableObject, ViewLifeCycle {
     }
   }
 
-  func didTapOnNews(article: Article) {
-    router.routeToNewDetails(link: article.link)
+  func didTapOnArticle(_ article: Article) {
+    router.routeToArticleDetails(link: article.link)
   }
 }
 
-extension NewsViewModel: ArticleWorkerDelegate {
+extension ArticlesViewModel: ArticleWorkerDelegate {
 
   @MainActor
-  func didUpdateNews(_ articles: [Article]) async {
-    self.articles = articles
+  func didUpdateArticles(_ articles: [Article], type: ArticleUpdate) async {
+    switch type {
+    case .reset:
+      self.articles = articles
+    case .update:
+      self.articles += articles
+    }
   }
 }

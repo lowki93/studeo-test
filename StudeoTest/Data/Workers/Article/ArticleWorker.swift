@@ -13,5 +13,5 @@ protocol ArticleWorker {
 }
 
 protocol ArticleWorkerDelegate: AnyObject {
-  func didUpdateNews(_ articles: [Article]) async
+  func didUpdateArticles(_ articles: [Article], type: ArticleUpdate) async
 }

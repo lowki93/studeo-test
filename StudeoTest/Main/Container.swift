@@ -31,15 +31,15 @@ extension Container {
   }
 
   private func registerScenes() {
-    registerNewsView()
+    registerArticlesView()
   }
 
-  private func registerNewsView() {
-    register(CustomHostingController<NewsView>.self) { resolver in
+  private func registerArticlesView() {
+    register(CustomHostingController<ArticlesView>.self) { resolver in
       let articleWorker = resolver.resolve(ArticleWorker.self)!
-      let router = NewsRouter()
-      let viewModel = NewsViewModel(articleWorker: articleWorker, router: router)
-      let view = NewsView(viewModel: viewModel)
+      let router = ArticlesRouter()
+      let viewModel = ArticlesViewModel(articleWorker: articleWorker, router: router)
+      let view = ArticlesView(viewModel: viewModel)
       let viewController = CustomHostingController(rootView: view, viewLifeCycle: viewModel)
       router.inject(viewController: viewController)
 

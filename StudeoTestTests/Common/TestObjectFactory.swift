@@ -35,6 +35,10 @@ enum TestObjectFactory {
     return [.newsApi, .gnews, .mediastack].randomElement() ?? .newsApi
   }
 
+  static func createArticleUpdate() -> ArticleUpdate {
+    return [.reset, .update].randomElement() ?? .reset
+  }
+
   // MARK: - Generator
   static func createRandomString(length: Int = 32) -> String {
     let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

@@ -10,7 +10,7 @@ import InstantMock
 
 final class ArticleWorkerDelegateMock: Mock, ArticleWorkerDelegate {
 
-  func didUpdateNews(_ articles: [Article]) async {
-    super.call(articles)
+  func didUpdateArticles(_ articles: [Article], type: ArticleUpdate) {
+    super.call(articles, type)
   }
 }

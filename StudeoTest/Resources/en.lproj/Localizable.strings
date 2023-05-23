@@ -10,6 +10,6 @@
 "error.network.unauthorized" = "You are not authorized";
 "error.unknown" = "An error has occured";
 
-// NewsView
-"news.navigation.title" = "News";
-"news.row.publishedAtFrom" = "At %1$@ from %2$@";
+// ArticlesView
+"article.navigation.title" = "News";
+"article.row.publishedAtFrom" = "At %1$@ from %2$@";

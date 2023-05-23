@@ -1,5 +1,5 @@
 //
-//  NewsRouter.swift
+//  ArticlesRouter.swift
 //  StudeoTest
 //
 //  Created by Kevin Budain on 21/05/2023.
@@ -8,11 +8,11 @@
 import UIKit
 import SafariServices
 
-protocol NewsRouting {
-  func routeToNewDetails(link: URL)
+protocol ArticlesRouting {
+  func routeToArticleDetails(link: URL)
 }
 
-final class NewsRouter: NewsRouting {
+final class ArticlesRouter: ArticlesRouting {
 
   private weak var viewController: UIViewController?
 
@@ -20,7 +20,7 @@ final class NewsRouter: NewsRouting {
     self.viewController = viewController
   }
 
-  func routeToNewDetails(link: URL) {
+  func routeToArticleDetails(link: URL) {
     let controller = SFSafariViewController(url: link)
     controller.modalPresentationStyle = .overFullScreen
     viewController?.present(controller, animated: true)

@@ -1,5 +1,5 @@
 //
-//  NewsRow.swift
+//  ArticleRow.swift
 //  StudeoTest
 //
 //  Created by Kevin Budain on 21/05/2023.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct NewsRow: View {
+struct ArticleRow: View {
 
   @Environment(\.redactionReasons) var redactionReasons
   var article: Article
 
   var body: some View {
     VStack(alignment: .leading, spacing: .xSmall) {
-      Text(L10n.News.Row.publishedAtFrom(DateFormatter.time(style: .short, date: article.publishedAt), article.source))
+      Text(L10n.Article.Row.publishedAtFrom(DateFormatter.time(style: .short, date: article.publishedAt), article.source))
       .font(.caption2)
       .foregroundColor(.secondary)
       HStack(alignment: .top, spacing: .xSmall) {

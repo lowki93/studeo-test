@@ -11,14 +11,14 @@ import InstantMock
 
 final class ArticlesViewModelTests: XCTestCase {
 
-  private var viewModel: NewsViewModel!
+  private var viewModel: ArticlesViewModel!
   private var articleWorker: ArticleWorkerMock!
   private var router: ArticlesRoutingMock!
 
   override func setUp() {
     articleWorker = ArticleWorkerMock()
     router = ArticlesRoutingMock()
-    viewModel = NewsViewModel(articleWorker: articleWorker, router: router)
+    viewModel = ArticlesViewModel(articleWorker: articleWorker, router: router)
   }
 
   func test_viewDidLoad_ok() async throws {
@@ -89,25 +89,37 @@ final class ArticlesViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.error, .error(expectedError))
   }
 
-  func test_didTapOnNews() {
+  func test_didTapOnArticle() {
     let expectedArticle = TestObjectFactory.createArticle()
     let linkCaptor = ArgumentCaptor<URL>()
 
     router
       .expect()
-      .call(router.routeToNewDetails(link: linkCaptor.capture()), count: 1)
+      .call(router.routeToArticleDetails(link: linkCaptor.capture()), count: 1)
 
-    viewModel.didTapOnNews(article: expectedArticle)
+    viewModel.didTapOnArticle(expectedArticle)
 
     router.verify()
   }
 
   // MARK: - ArticleWorkerDelegate
-  func test_didUpdateNews_ok() async {
+  func test_didUpdateNews_ok_reset() async {
+    let articles = TestObjectFactory.createArticles()
     let expectedArticles = TestObjectFactory.createArticles()
 
-    await articleWorker.delegate?.didUpdateNews(expectedArticles)
+    viewModel.articles = articles
+    await articleWorker.delegate?.didUpdateArticles(expectedArticles, type: .reset)
 
     XCTAssertEqual(viewModel.articles, expectedArticles)
+  }
+
+  func test_didUpdateNews_ok_update() async {
+    let articles = TestObjectFactory.createArticles()
+    let expectedArticles = TestObjectFactory.createArticles()
+
+    viewModel.articles = articles
+    await articleWorker.delegate?.didUpdateArticles(expectedArticles, type: .update)
+
+    XCTAssertEqual(viewModel.articles, articles + expectedArticles)
   }
 }

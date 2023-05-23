@@ -11,25 +11,25 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
+  internal enum Article {
+    internal enum Navigation {
+      /// News
+      internal static let title = L10n.tr("Localizable", "article.navigation.title")
+    }
+    internal enum Row {
+      /// At %1$@ from %2$@
+      internal static func publishedAtFrom(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "article.row.publishedAtFrom", String(describing: p1), String(describing: p2))
+      }
+    }
+  }
+
   internal enum Error {
     /// An error has occured
     internal static let unknown = L10n.tr("Localizable", "error.unknown")
     internal enum Network {
       /// You are not authorized
       internal static let unauthorized = L10n.tr("Localizable", "error.network.unauthorized")
-    }
-  }
-
-  internal enum News {
-    internal enum Navigation {
-      /// News
-      internal static let title = L10n.tr("Localizable", "news.navigation.title")
-    }
-    internal enum Row {
-      /// At %1$@ from %2$@
-      internal static func publishedAtFrom(_ p1: Any, _ p2: Any) -> String {
-        return L10n.tr("Localizable", "news.row.publishedAtFrom", String(describing: p1), String(describing: p2))
-      }
     }
   }
 }

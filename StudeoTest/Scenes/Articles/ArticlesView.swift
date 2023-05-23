@@ -1,5 +1,5 @@
 //
-//  NewsView.swift
+//  ArticlesView.swift
 //  StudeoTest
 //
 //  Created by Kevin Budain on 17/05/2023.
@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct NewsView: View {
+struct ArticlesView: View {
 
-  @ObservedObject var viewModel: NewsViewModel
+  @ObservedObject var viewModel: ArticlesViewModel
 
   var body: some View {
     List(viewModel.articles) { article in
       Button {
-        viewModel.didTapOnNews(article: article)
+        viewModel.didTapOnArticle(article)
       } label: {
-        NewsRow(article: article)
+        ArticleRow(article: article)
       }
     }
     .listStyle(.grouped)
-    .navigationTitle(L10n.News.Navigation.title)
+    .navigationTitle(L10n.Article.Navigation.title)
     .redacted(reason: viewModel.isLoading ? .placeholder : [])
     .toast(configuration: $viewModel.error)
   }

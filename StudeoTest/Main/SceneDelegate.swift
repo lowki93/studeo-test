@@ -14,7 +14,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = scene as? UIWindowScene,
-          let controller = container.resolve(CustomHostingController<NewsView>.self)
+          let controller = container.resolve(CustomHostingController<ArticlesView>.self)
     else { return }
 
     window = UIWindow(windowScene: windowScene)

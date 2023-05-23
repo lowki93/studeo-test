@@ -9,9 +9,9 @@ import Foundation
 import InstantMock
 @testable import StudeoTest
 
-final class ArticlesRoutingMock: Mock, NewsRouting {
+final class ArticlesRoutingMock: Mock, ArticlesRouting {
 
-  func routeToNewDetails(link: URL) {
+  func routeToArticleDetails(link: URL) {
     super.call(link)
   }
 }
