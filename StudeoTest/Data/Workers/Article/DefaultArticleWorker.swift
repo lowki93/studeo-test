@@ -23,7 +23,7 @@ final class DefaultArticleWorker: ArticleWorker {
       for source in ArticleSource.allCases {
         group.addTask {
           do {
-            let articles = try await self.articleNetworkService.articles(from: source, query: query, perPage: perPage)
+            let articles = try await self.articleNetworkService.articles(from: source, query: query, perPage: perPage / ArticleSource.allCases.count)
             self.sources.append(source)
             await self.delegate?.didUpdateArticles(articles, type: self.sources.count == 1 ? .reset : .update)
             return articles

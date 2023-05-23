@@ -23,8 +23,9 @@ final class ArticleWorkerTests: XCTestCase {
   }
 
   func test_articles_ok() async throws {
+    let perPage = TestObjectFactory.createRandomInt()
     let expectedQuery = TestObjectFactory.createRandomString()
-    let expectedPerPage = TestObjectFactory.createRandomInt()
+    let expectedPerPage = perPage / ArticleSource.allCases.count
     let expectedNewsApiArticles = [TestObjectFactory.createArticle()]
     let expectedGnewsArticles = [TestObjectFactory.createArticle()]
     let expectedTheNewsApiApiArticles = [TestObjectFactory.createArticle()]
@@ -49,7 +50,7 @@ final class ArticleWorkerTests: XCTestCase {
       .expect()
       .call(delegate.didUpdateArticles(Arg.any(), type: Arg.any()), count: 3)
 
-    let results = try await worker.articles(query: expectedQuery, perPage: expectedPerPage)
+    let results = try await worker.articles(query: expectedQuery, perPage: perPage)
 
     articleNetworkService.verify()
     delegate.verify()
@@ -61,8 +62,9 @@ final class ArticleWorkerTests: XCTestCase {
   }
 
   func test_articles_ko_newsApi_failed() async throws {
+    let perPage = TestObjectFactory.createRandomInt()
     let expectedQuery = TestObjectFactory.createRandomString()
-    let expectedPerPage = TestObjectFactory.createRandomInt()
+    let expectedPerPage = perPage / ArticleSource.allCases.count
     let expectedError = TestObjectFactory.TestError.dummy
     let expectedGnewsArticles = [TestObjectFactory.createArticle()]
     let expectedTheNewsApiApiArticles = [TestObjectFactory.createArticle()]
@@ -87,7 +89,7 @@ final class ArticleWorkerTests: XCTestCase {
       .expect()
       .call(delegate.didUpdateArticles(Arg.any(), type: Arg.any()), count: 2)
 
-    await XCTAssertAsyncThrowsError(try await worker.articles(query: expectedQuery, perPage: expectedPerPage)) { error in
+    await XCTAssertAsyncThrowsError(try await worker.articles(query: expectedQuery, perPage: perPage)) { error in
       XCTAssertEqual(error as! TestObjectFactory.TestError, .dummy)
     }
 
@@ -96,8 +98,9 @@ final class ArticleWorkerTests: XCTestCase {
   }
 
   func test_articles_ko_newsApi_and_gnews_failed() async throws {
+    let perPage = TestObjectFactory.createRandomInt()
     let expectedQuery = TestObjectFactory.createRandomString()
-    let expectedPerPage = TestObjectFactory.createRandomInt()
+    let expectedPerPage = perPage / ArticleSource.allCases.count
     let expectedError = TestObjectFactory.TestError.dummy
     let expectedTheNewsApiApiArticles = [TestObjectFactory.createArticle()]
 
@@ -121,7 +124,7 @@ final class ArticleWorkerTests: XCTestCase {
       .expect()
       .call(delegate.didUpdateArticles(Arg.any(), type: Arg.any()), count: 1)
 
-    await XCTAssertAsyncThrowsError(try await worker.articles(query: expectedQuery, perPage: expectedPerPage)) { error in
+    await XCTAssertAsyncThrowsError(try await worker.articles(query: expectedQuery, perPage: perPage)) { error in
       XCTAssertEqual(error as! TestObjectFactory.TestError, .dummy)
     }
 
@@ -130,8 +133,9 @@ final class ArticleWorkerTests: XCTestCase {
   }
 
   func test_articles_ko_newsApi_gnews_mediastack_failed() async throws {
+    let perPage = TestObjectFactory.createRandomInt()
     let expectedQuery = TestObjectFactory.createRandomString()
-    let expectedPerPage = TestObjectFactory.createRandomInt()
+    let expectedPerPage = perPage / ArticleSource.allCases.count
     let expectedError = TestObjectFactory.TestError.dummy
 
     try await articleNetworkService
@@ -154,7 +158,7 @@ final class ArticleWorkerTests: XCTestCase {
       .reject()
       .call(delegate.didUpdateArticles(Arg.any(), type: Arg.any()))
 
-    await XCTAssertAsyncThrowsError(try await worker.articles(query: expectedQuery, perPage: expectedPerPage)) { error in
+    await XCTAssertAsyncThrowsError(try await worker.articles(query: expectedQuery, perPage: perPage)) { error in
       XCTAssertEqual(error as! TestObjectFactory.TestError, .dummy)
     }
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArticlesView: View {
 
-  @ObservedObject var viewModel: ArticlesViewModel
+  @StateObject var viewModel: ArticlesViewModel
 
   var body: some View {
     List(viewModel.articles) { article in

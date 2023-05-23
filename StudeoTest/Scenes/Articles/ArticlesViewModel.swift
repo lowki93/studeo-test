@@ -26,7 +26,7 @@ final class ArticlesViewModel: ObservableObject, ViewLifeCycle {
   @MainActor
   func viewDidLoad() async {
     do {
-      let articles = try await articleWorker.articles(query: "apple", perPage: 2)
+      let articles = try await articleWorker.articles(query: "apple", perPage: 12)
       self.articles = articles
     } catch {
       if isLoading {

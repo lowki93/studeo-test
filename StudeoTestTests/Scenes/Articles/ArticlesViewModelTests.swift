@@ -23,7 +23,7 @@ final class ArticlesViewModelTests: XCTestCase {
 
   func test_viewDidLoad_ok() async throws {
     let expectedQuery = "apple"
-    let expectedPerPage = 2
+    let expectedPerPage = 12
     let expectedArticles = TestObjectFactory.createArticles()
     let queryCaptor = ArgumentCaptor<String>()
     let perPageCaptor = ArgumentCaptor<Int>()
@@ -45,7 +45,7 @@ final class ArticlesViewModelTests: XCTestCase {
 
   func test_viewDidLoad_ko_isLoading_true() async throws {
     let expectedQuery = "apple"
-    let expectedPerPage = 2
+    let expectedPerPage = 12
     let expectedError = TestObjectFactory.TestError.dummy
     let queryCaptor = ArgumentCaptor<String>()
     let perPageCaptor = ArgumentCaptor<Int>()
@@ -67,7 +67,7 @@ final class ArticlesViewModelTests: XCTestCase {
 
   func test_viewDidLoad_ko_isLoading_false() async throws {
     let expectedQuery = "apple"
-    let expectedPerPage = 2
+    let expectedPerPage = 12
     let expectedArticles = TestObjectFactory.createArticles()
     let expectedError = TestObjectFactory.TestError.dummy
     let queryCaptor = ArgumentCaptor<String>()

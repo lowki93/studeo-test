@@ -25,5 +25,4 @@ final class ArticlesRouter: ArticlesRouting {
     controller.modalPresentationStyle = .overFullScreen
     viewController?.present(controller, animated: true)
   }
-
 }
