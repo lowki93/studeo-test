@@ -3,7 +3,7 @@
 First, run `make init` to install required dependencies
 
 Create a simple application that fetch a list of news from 3 differents sources.
-The project must be open with Xcode 14.3, I also join a video of the application
+The project must be open with Xcode 14.3.
 
 The user can :
 - see a list of article
